@@ -1,0 +1,20 @@
+varying vec3 N;
+varying vec3 vPosition;
+varying vec3 L; 
+varying vec3 v;
+ 
+void main(){ 
+	vPosition = vec3 (gl_ModelViewMatrix * gl_Vertex);
+	N = normalize(gl_NormalMatrix * gl_Normal);
+		
+	// Light direction
+	L = normalize(gl_LightSource[0].position.xyz - vPosition);
+	
+	// view vector (camera position (0,0,0) - vertex position)
+	v = normalize(-vPosition);	
+
+	gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+
+	// if passing texture coordinates
+	//gl_TexCoord[0].st = vec2(gl_MultiTexCoord0); 
+}
